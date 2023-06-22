@@ -1,48 +1,570 @@
-<!doctype html>
-<html>
-  <head>
-    <style>
-@keyframes bgcolor {
-    0% {
-        background-color: #45a3e5
-    }
+<!DOCTYPE HTML>
+<html lang="en">
 
-    30% {
-        background-color: #66bf39
-    }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-    60% {
-        background-color: #eb670f
-    }
+    <title>The Gateway Project - Coming Soon!</title>
 
-    90% {
-        background-color: #f35
-    }
-
-    100% {
-        background-color: #864cbf
-    }
-}
+    <link href='https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,700,900' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Iceberg' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="images/favicon.ico">
+</head>
+<style>
+    html,
 body {
-    -webkit-animation: bgcolor 20s infinite;
-    animation: bgcolor 10s infinite;
-    -webkit-animation-direction: alternate;
-    animation-direction: alternate;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
-    </style>
-    <title>Audio</title>
-  </head>
-  <body>
-    <img src="https://grabify.link/IYOMK3">
-    <script>
-      function play() {
-        var audio = document.getElementById("audio");
-        audio.play();
+a {
+    text-decoration: none !important;
+    color: #000;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+      text-decoration: none !important;
+      color: #8f8f8f;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+}
+
+.page-loader {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+}
+.loader-icon {
+    top: 50%;
+    left: 50%;
+    right: 0;
+    position: absolute;
+    margin: -20px 0 0 -20px;
+    bottom: 0;
+}
+.backstretch:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://projectgateway.org/wp-content/uploads/2023/06/overlay.png');
+    background-color: rgba(95, 96, 96, 0.4);
+    z-index: 1;
+}
+
+
+header {
+    position: relative;
+    text-align: center;
+    padding-top: 100px;
+    overflow: hidden;
+    min-height: 120vh; /* Adjust as needed */
+}
+header .logo img {
+    position: relative;
+    z-index: 2;
+}
+header h1 {
+    font-size: 2.5em;
+    color: #fff;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    z-index: 2;
+}
+header p {
+    font-size: 14px;
+    color: rgba(236, 240, 241, 0.9);
+    word-spacing: 1px;
+    line-height: 25px;
+    padding-bottom: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+header #effect-box, header .video-box, header .image-box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+h1, p, .logo, .countdown {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes wobbleArrow {
+    from {
+        bottom: 40px;
+    }
+    to {
+        bottom: 50px;
+    }
+}
+@-webkit-keyframes wobbleArrow {
+    from {
+        bottom: 40px;
+    }
+    to {
+        bottom: 50px;
+    }
+}
+
+.countdown {
+    font-size: 4em;
+    margin: 0 auto;
+    font-family: 'Iceberg', sans-serif;
+    line-height: 65px;
+    display: inline-block;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+}
+.countdown div span {
+    display: block;
+    font-size: 16px;
+    line-height: 19px;
+}
+.countdown div {
+    display: inline-block;
+    margin: 0 34px;
+}
+</style>
+
+
+<body>
+
+    <!--= LOADER TEMPLATE -->
+    <div class="page-loader">
+        <div class="loader-icon"><img src="https://projectgateway.org/wp-content/uploads/2023/06/spinner.gif" alt=""></div>
+    </div>
+    <!-- /LOADER TEMPLATE -->
+
+
+  
+
+    <!-- HEADER -->
+    <header id="top">
+
+
+        <div class="logo"><img src="https://projectgateway.org/wp-content/uploads/2023/06/logo.webp" width="384.75" height="288" alt=""> </div>
+        <h1 style="font-family: 'Crimson Pro', serif;font-size: 75px;">The Gateway Project</h1>
+        <h1>COMING SOON</h1>
+
+        <p>Our website is under construction, we are working very hard to give you the best experience with this one.<br> You will love The Gateway Project as much as we do.</p>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown"> </div>
+        <!-- /COUNTDOWN -->
+
+
+        <!-- SINGLE BACKGROUND IMAGE -->
+        <div class="image-box"></div>
+
+
+        <!-- EFFECT BOX -->
+        <div id="effect-box">
+            <canvas id="rainbow"></canvas>
+        </div>
+
+
+    </header>
+    <!-- END HEADER -->
+
+
+    <!-- Javascript files -->
+    <!-- jQuery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Backstretch -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/src/jquery.backstretch.js"></script>
+    <!-- CountDown  -->
+    <script type="text/javascript">// Generated by CoffeeScript 1.4.0
+
+/*
+countdown is a simple jquery plugin for countdowns
+
+Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+and GPL-3.0 (http://opensource.org/licenses/GPL-3.0) licenses.
+
+@source: http://github.com/rendro/countdown/
+@autor: Robert Fleischmann
+@version: 1.0.1
+*/
+
+
+(function() {
+
+  (function($) {
+    $.countdown = function(el, options) {
+      var getDateData,
+        _this = this;
+      this.el = el;
+      this.$el = $(el);
+      this.$el.data("countdown", this);
+      this.init = function() {
+        _this.options = $.extend({}, $.countdown.defaultOptions, options);
+        if (_this.options.refresh) {
+          _this.interval = setInterval(function() {
+            return _this.render();
+          }, _this.options.refresh);
+        }
+        _this.render();
+        return _this;
+      };
+      getDateData = function(endDate) {
+        var dateData, diff;
+        endDate = Date.parse($.isPlainObject(_this.options.date) ? _this.options.date : new Date(_this.options.date));
+        diff = (endDate - Date.parse(new Date)) / 1000;
+        if (diff <= 0) {
+          diff = 0;
+          if (_this.interval) {
+            _this.stop();
+          }
+          _this.options.onEnd.apply(_this);
+        }
+        dateData = {
+          years: 0,
+          days: 0,
+          hours: 0,
+          min: 0,
+          sec: 0,
+          millisec: 0
+        };
+   
+        if (diff >= 86400) {
+          dateData.days = Math.floor(diff / 86400);
+          diff -= dateData.days * 86400;
+        }
+        if (diff >= 3600) {
+          dateData.hours = Math.floor(diff / 3600);
+          diff -= dateData.hours * 3600;
+        }
+        if (diff >= 60) {
+          dateData.min = Math.floor(diff / 60);
+          diff -= dateData.min * 60;
+        }
+        dateData.sec = diff;
+        return dateData;
+      };
+      this.leadingZeros = function(num, length) {
+        if (length == null) {
+          length = 2;
+        }
+        num = String(num);
+        while (num.length < length) {
+          num = "0" + num;
+        }
+        return num;
+      };
+      this.update = function(newDate) {
+        _this.options.date = newDate;
+        return _this;
+      };
+      this.render = function() {
+        _this.options.render.apply(_this, [getDateData(_this.options.date)]);
+        return _this;
+      };
+      this.stop = function() {
+        if (_this.interval) {
+          clearInterval(_this.interval);
+        }
+        _this.interval = null;
+        return _this;
+      };
+      this.start = function(refresh) {
+        if (refresh == null) {
+          refresh = _this.options.refresh || $.countdown.defaultOptions.refresh;
+        }
+        if (_this.interval) {
+          clearInterval(_this.interval);
+        }
+        _this.render();
+        _this.options.refresh = refresh;
+        _this.interval = setInterval(function() {
+          return _this.render();
+        }, _this.options.refresh);
+        return _this;
+      };
+      return this.init();
+    };
+    $.countdown.defaultOptions = {
+      date: "June 7, 2087 15:03:25",
+      refresh: 1000,
+      onEnd: $.noop,
+      render: function(date) {
+        return $(this.el).html("" + date.years + " years, " + date.days + " days, " + (this.leadingZeros(date.hours)) + " hours, " + (this.leadingZeros(date.min)) + " min and " + (this.leadingZeros(date.sec)) + " sec");
       }
-    </script>
+    };
+    $.fn.countdown = function(options) {
+      return $.each(this, function(i, el) {
+        var $el;
+        $el = $(el);
+        if (!$el.data('countdown')) {
+          return $el.data('countdown', new $.countdown(el, options));
+        }
+      });
+    };
+    return void 0;
+  })(jQuery);
 
-    <input type="button" value="PLAY" onclick="play()">
-    <audio id="audio" src="https://www.soundboard.com/handler/DownLoadTrack.ashx?cliptitle=vine+boom&filename=25/254608-444df118-bb74-4a50-ab50-f1ae6a61d7f4.mp3" autoplay>
+}).call(this);</script>
+    <!-- Rainbow Squares -->
+    <script type="text/javascript">/*
+  falling rainbow squares
+  A PEN BY Ana Tudor
+*/
 
-  </body>
+function draw() {
+var N_SQUARES = 164, 
+        OPTS = ['fill', 'stroke'], 
+        c = document.getElementById('rainbow'),
+        ξ = c.getContext('2d'), 
+        w = c.width, h = c.height, co = .9*h, 
+        squares = [];
+
+var rand = function(max, min, is_int) {
+    var max = ((max - 1) || 0) + 1, 
+            min = min || 0, 
+            gen = min + (max - min)*Math.random();
+    
+    return is_int ? ~~gen : gen;
+};
+
+var Square = function() {
+    var x, y, e, o, θ, v, ω, α, φ, a, f;
+    
+    this.init = function() {
+        e = rand(16, 8, 1); // square edge length
+        o = -.5*e;
+        x = rand(w - o, o, 1);
+        y = rand(-co, -e, 1);
+        θ = rand(.5*Math.PI);
+        v = rand(3, .25); // speed going down
+        ω = rand(.02, .005)*Math.PI; // angular velocity
+        α = [.5, .5]; φ = []; a = []; f = [];
+        
+        for(var i = 0; i < 2; i++) {
+            φ.push(rand(2*Math.PI));
+            a.push(rand(.4, .1));
+            f.push(rand(.001, .0001)*Math.PI);
+        }
+    };
+    
+    this.update = function(t) {
+        var k, d;
+
+        y += v;
+        θ += ω;
+
+        k = Math.max(0, Math.floor(y/co));
+        d = y - co;
+
+        for(var i = 0; i < 2; i++) 
+            α[i] = Math.max(0, .4 + .1*i + a[i]*Math.sin(f[i]*t + φ[i]) - k*d*.01);
+
+        if(y > h + e || !(α[0] + α[1])) this.init();
+
+        ξ.fillStyle = ξ.strokeStyle = 'hsl(' + ~~(t + .2*y) + ',100%,65%)';
+
+        this.draw();
+    };
+    
+    this.draw = function() {
+        ξ.save();
+        ξ.translate(x, y);
+        ξ.rotate(θ);
+        
+        for(var i = 0; i < 2; i++) {
+            ξ.beginPath();
+            ξ.globalAlpha = α[i];
+            ξ[OPTS[i] + 'Rect'](o, o, e, e);
+        }
+        
+        ξ.restore();
+    };
+    
+    this.init();
+};
+
+var ani = function(t) {
+    ξ.clearRect(0, 0, w, h);
+    
+    for(var i = 0; i < N_SQUARES; i++) 
+        squares[i].update(t);
+    
+    requestAnimationFrame(ani.bind(this, ++t));
+};
+
+(function init() {
+    for(var i = 0; i < N_SQUARES; i++) 
+        squares.push(new Square);
+    
+    ani(0);
+})();
+};
+
+(function() {
+            var 
+                // Obtain a reference to the canvas element
+                // using its id.
+                htmlCanvas = document.getElementById('rainbow'),
+            
+                // Obtain a graphics context on the
+                // canvas element for drawing.
+                context = htmlCanvas.getContext('2d');
+ 
+            // Start listening to resize events and
+            // draw canvas.
+            initialize();
+ 
+            function initialize() {
+                // Register an event listener to
+                // call the resizeCanvas() function each time 
+                // the window is resized.
+                window.addEventListener('resize', resizeCanvas, false);
+                
+                // Draw canvas border for the first time.
+                resizeCanvas();
+            }
+        
+            // Runs each time the DOM window resize event fires.
+            // Resets the canvas dimensions to match window,
+            // then draws the new borders accordingly.
+            function resizeCanvas() {
+                htmlCanvas.width = window.innerWidth;
+                htmlCanvas.height = window.innerHeight;
+                draw(); 
+            }
+        
+})();
+</script>
+    <!-- Custom -->
+    <script>jQuery.noConflict()(function($) {
+
+    'use strict'; 
+  
+     var isMobile = {
+        Android: function() {
+          return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+          return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iPhone: function() {
+          return navigator.userAgent.match(/iPhone/i);
+        },
+        iPad: function() {
+          return navigator.userAgent.match(/iPad/i);
+        },
+        iPod: function() {
+          return navigator.userAgent.match(/iPod/i);
+        },
+        iOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+          return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+          return navigator.userAgent.match(/IEMobile/i);
+        },
+        any: function() {
+          return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+        }
+      };
+  
+      mt_page_loader();
+      mt_image_background();
+      //mt_video_background();
+      mt_countdown();
+
+/* ================================= */
+/* :::::::: 1. Page Loader ::::::::: */
+/* ================================= */
+
+function mt_page_loader() {
+    $(".loader-icon").delay(500).fadeOut();
+    $(".page-loader").delay(700).fadeOut("slow");
+    } 
+
+    setTimeout(function() {
+    $("header .mouse").delay(1500).css({display: 'none'}).fadeIn(1500);
+    $("header .logo img").delay(1200).css({display: 'none'}).fadeIn(1200);
+    $("header p").delay(1200).css({display: 'none'}).fadeIn(1200);
+    $("header h1").delay(1200).css({display: 'none'}).fadeIn(1200);
+    $("header .countdown").delay(1200).css({display: 'none'}).fadeIn(1200);
+    });
+
+
+/* ================================= */
+/* ::::::::: 2. Backstretch :::::::: */
+/* ================================= */
+
+function mt_image_background() {
+
+    /* Active Single Image Background  */  
+      
+    $(".image-box").backstretch("https://projectgateway.org/wp-content/uploads/2023/06/background1-jpg.webp");
+                      
+} 
+
+
+/* ================================= */
+/* :::::::::: 5. Countdown ::::::::: */
+/* ================================= */
+
+// To change date, simply edit: var endDate = "Dec 01, 2023 20:39:00";
+
+function mt_countdown() {
+
+    var endDate = "July 1, 2023 00:00:00";
+    $('.countdown').countdown({
+        date: endDate,
+        render: function(data) {
+            $(this.el).html("<div>" + this.leadingZeros(data.days, 3) + " <span>days</span></div><div>" + this.leadingZeros(data.hours, 2) + " <span>hours</span></div><div>" + this.leadingZeros(data.min, 2) + " <span>minutes</span></div><div>" + this.leadingZeros(data.sec, 2) + " <span>seconds</span></div>");
+        }
+    });
+
+}
+
+
+
+
+});</script>
+</body>
+
 </html>
